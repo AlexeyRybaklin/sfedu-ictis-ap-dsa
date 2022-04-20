@@ -6,7 +6,7 @@
 #include <iostream>
 #include "Tests.h"
 
-void print(Array<int> *arr) {
+void print(Array<int>* arr) {
     printf("\n");
     for (int i = 0; i < arr->size; i++) {
         printf(" %d,", arr->array[i]);
@@ -14,7 +14,7 @@ void print(Array<int> *arr) {
     printf("\n");
 }
 
-void rand(Array<int> *arr) {
+void rand(Array<int>* arr) {
     if (arr == nullptr) {
         return;
     }
@@ -27,7 +27,7 @@ void rand(Array<int> *arr) {
 int ArrayTestsNS::testFind() {
     int errors = 0;
     const int size = rand() % 100 + 50;
-    Array<int> *arr = ArrayNS::newArray<int>(size);
+    Array<int>* arr = ArrayNS::newArray<int>(size);
     rand(arr);
     if (arr == nullptr) {
         return 1;
@@ -36,7 +36,7 @@ int ArrayTestsNS::testFind() {
     for (int i = 0; i < size; i++) {
         int curPos = i;
         int atPos = arr->array[curPos];
-        int *atPosPoint = ArrayNS::find(arr, atPos);
+        int* atPosPoint = ArrayNS::find(arr, atPos);
         if (atPosPoint == nullptr) {
             errors++;
             printf("=========================\n");
@@ -59,7 +59,7 @@ int ArrayTestsNS::testFind() {
         }
         int newVal = -1 * (atPos + (rand() % 50 + 1));
         ArrayNS::insertToArray(arr, newVal, curPos);
-        int *actual = ArrayNS::find(arr, newVal);
+        int* actual = ArrayNS::find(arr, newVal);
 
         if (actual == nullptr) {
             printf("=========================\n");
@@ -90,14 +90,14 @@ int ArrayTestsNS::testInsert() {
     int errors = 0;
 
     const int size = rand() % 100 + 50;
-    Array<int> *arr = ArrayNS::newArray<int>(size);
+    Array<int>* arr = ArrayNS::newArray<int>(size);
     rand(arr);
     for (int i = 0; i < arr->size / 3; i++) {
         const int curPos = rand() % size;
         const int oldValue = arr->array[curPos];
         const int expected = oldValue + (rand() % 90 + 1);
         ArrayNS::insertToArray(arr, expected, curPos);
-        int *found = ArrayNS::find(arr, expected);
+        int* found = ArrayNS::find(arr, expected);
         errors += (*found != expected);
         return errors;
     }
@@ -108,10 +108,10 @@ int ArrayTestsNS::testInsert() {
 int StackTestsNS::test() {
     int errors = 0;
     const int size = rand() % 100 + 50;
-    Array<int> *arr = ArrayNS::newArray<int>(size);
+    Array<int>* arr = ArrayNS::newArray<int>(size);
     rand(arr);
 
-    auto *stack = StackNS::newStack<int>();
+    auto* stack = StackNS::newStack<int>();
     for (int i = 0; i < arr->size; i++) {
         StackNS::push(stack, arr->array[i]);
     }
@@ -128,10 +128,10 @@ int StackTestsNS::test() {
 int QueueTestsNS::test() {
     int errors = 0;
     const int size = rand() % 100 + 50;
-    Array<int> *arr = ArrayNS::newArray<int>(size);
+    Array<int>* arr = ArrayNS::newArray<int>(size);
     rand(arr);
 
-    auto *q = QueueNS::newQueue<int>();
+    auto* q = QueueNS::newQueue<int>();
     for (int i = 0; i < arr->size; i++) {
         QueueNS::enqueue(q, arr->array[i]);
     }
@@ -146,9 +146,9 @@ int QueueTestsNS::test() {
 
 int ListTestsNS::test() {
     int errors = 0;
-    auto *arr = ArrayNS::newArray<int>(rand() % 100 + 50);
+    auto* arr = ArrayNS::newArray<int>(rand() % 100 + 50);
     rand(arr);
-    auto *list = ListNS::newList<int>();
+    auto* list = ListNS::newList<int>();
     for (int i = 0; i < arr->size; i++) {
         ListNS::addAsAFirst(list, arr->array[i]);
         ListNS::addAsALast(list, arr->array[i]);
@@ -156,23 +156,22 @@ int ListTestsNS::test() {
 
     for (int i = 0; i < 2 * arr->size; i++) {
         int rndIndex = rand() % arr->size;
-        auto *found = ListNS::find(list, arr->array[rndIndex]);
+        auto* found = ListNS::find(list, arr->array[rndIndex]);
         if (found == nullptr) {
             std::cerr << "ListNS -> find function works wrongly " << std::endl;
             errors++;
             break;
         }
-        ListNS::insertAfterNode(list,found,100000 + found->key);
-        auto *newFound = ListNS::find(list,100000 + found->key);
+        ListNS::insertAfterNode(list, found, 100000 + found->key);
+        auto* newFound = ListNS::find(list, 100000 + found->key);
         if (newFound == nullptr) {
             std::cerr << "ListNS -> insertAfterNode function works wrongly " << std::endl;
             errors++;
             break;
         }
         errors += (newFound != found->next);
-        newFound->previous->next = newFound->next;
-        newFound->next->previous = newFound->previous;
-        delete newFound;
+        ListNS::deleteNode(list, newFound);
+
     }
 
     ArrayNS::deleteArray(arr);
