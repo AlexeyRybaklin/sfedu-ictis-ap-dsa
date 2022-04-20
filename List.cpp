@@ -5,14 +5,12 @@
 namespace ListNS
 {
 	template<typename TYPE>
-
 	DoublyList<TYPE>* newList()
 	{
 		return new DoublyList<TYPE>{ NULL,NULL };
 	}
 
 	template<typename TYPE>
-
 	int addAsAFirst(DoublyList<TYPE>* list, TYPE value)
 	{
 		DoublyListNode<TYPE>* n;
@@ -28,7 +26,6 @@ namespace ListNS
 	}
 
 	template<typename TYPE>
-
 	int addAsALast(DoublyList<TYPE>* list, TYPE value)
 	{
 		if (!list)
@@ -43,7 +40,6 @@ namespace ListNS
 	}
 
 	template<typename TYPE>
-
 	DoublyListNode<TYPE>* find(DoublyList<TYPE>* list, TYPE value)
 	{
 		DoublyListNode<TYPE>* end,
@@ -63,7 +59,6 @@ namespace ListNS
 	}
 
 	template<typename TYPE>
-
 	int insertAfterNode(DoublyList<TYPE>* list, DoublyListNode<TYPE>* node, TYPE value)
 	{
 		if (!node || !list)
@@ -83,7 +78,6 @@ namespace ListNS
 
 
 	template<typename TYPE>
-
 	void deleteList(DoublyList<TYPE>* list)
 	{
 		if (!list->head)
@@ -100,7 +94,6 @@ namespace ListNS
 	}
 
 	template<typename TYPE>
-
 	int deleteNode(DoublyList<TYPE>* list, DoublyListNode<TYPE>* node)
 	{
 		DoublyListNode<TYPE>* del;
@@ -129,4 +122,4 @@ namespace ListNS
 		delete del;
 		return 1;
 	}
-}
+};
