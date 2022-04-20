@@ -10,17 +10,20 @@
 template<typename TYPE>
 struct DoublyListNode {
     TYPE key;
-    DoublyListNode<TYPE> *next;
-    DoublyListNode<TYPE> *previous;
+    DoublyListNode<TYPE>* next;
+    DoublyListNode<TYPE>* previous;
 };
 
 template<typename TYPE>
 struct DoublyList {
-    DoublyListNode<TYPE> *head;
-    DoublyListNode<TYPE> *tail;
+    DoublyListNode<TYPE>* head;
+    DoublyListNode<TYPE>* tail;
 };
 
 namespace ListNS {
+
+    template<typename TYPE>
+    int deleteNode(DoublyList<TYPE>* list, DoublyListNode<TYPE>* node);
 
     /**
     * TODO Implement function that initialize new @DoublyList.
@@ -28,7 +31,7 @@ namespace ListNS {
     * @return the pointer to the newly created @DoublyList structure.
     */
     template<typename TYPE>
-    DoublyList<TYPE> *newList();
+    DoublyList<TYPE>* newList();
 
     /**
     * TODO Implement function that add new values to the head of @DoublyList.
@@ -38,7 +41,7 @@ namespace ListNS {
     * @return The number of insert items.
     */
     template<typename TYPE>
-    int addAsAFirst(DoublyList<TYPE> *list, TYPE value);
+    int addAsAFirst(DoublyList<TYPE>* list, TYPE value);
 
     /**
     * TODO Implement function that add new values to the tail of @DoublyList.
@@ -48,7 +51,7 @@ namespace ListNS {
     * @return The number of insert items.
     */
     template<typename TYPE>
-    int addAsALast(DoublyList<TYPE> *list, TYPE value);
+    int addAsALast(DoublyList<TYPE>* list, TYPE value);
 
     /**
     * TODO Implement function that add new value after given node of @DoublyList.
@@ -58,7 +61,7 @@ namespace ListNS {
     * @return The number of insert items.
     */
     template<typename TYPE>
-    int insertAfterNode(DoublyList<TYPE> *list, DoublyListNode<TYPE> *node, TYPE value);
+    int insertAfterNode(DoublyList<TYPE>* list, DoublyListNode<TYPE>* node, TYPE value);
 
     /**
     * TODO Implement function that find node by value in @DoublyList.
@@ -68,7 +71,7 @@ namespace ListNS {
     * @return the pointer to the found node or nullptr if no such node.
     */
     template<typename TYPE>
-    DoublyListNode<TYPE> *find(DoublyList<TYPE> *list, TYPE value);
+    DoublyListNode<TYPE>* find(DoublyList<TYPE>* list, TYPE value);
 
     /**
      * TODO function should properly delete @list. Firstly the structure members must be deleted and after @list itself should be deleted.
@@ -76,7 +79,7 @@ namespace ListNS {
      * @param lsit the pointer to the list which should be properly deleted.
      */
     template<typename TYPE>
-    void deleteList(DoublyList<TYPE> *list);
+    void deleteList(DoublyList<TYPE>* list);
 
 }
 
