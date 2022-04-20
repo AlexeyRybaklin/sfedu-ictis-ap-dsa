@@ -1,54 +1,57 @@
-#include <Queue.h>
+#include <Stack.h>
 #include <cstddef>
 
-namespace QueueNS {
-
+namespace StackNS
+{
     template<typename TYPE>
-    Queue<TYPE>* newQueue()
+    Stack<TYPE>* newStack()
     {
-        return new Queue<TYPE>{ NULL , NULL };
+        return new Stack<TYPE>{ NULL };
     }
 
     template<typename TYPE>
-    int enqueue(Queue<TYPE>* queue, TYPE value)
+    int push(Stack<TYPE>* stack, TYPE value)
     {
-        if (!queue->head)
-            queue->head = queue->tail = new QueueNode<TYPE>{ value , NULL };
+        if (!stack->head)
+            stack->head = new StackNode<TYPE>{ value , NULL };
         else
-            queue->tail = queue->tail->next = new QueueNode<TYPE>{ value , NULL };
+            stack->head = new StackNode<TYPE>{ value , stack->head };
 
         return 1;
     }
 
-
     template<typename TYPE>
-    QueueNode<TYPE>* dequeue(Queue<TYPE>* queue)
+    StackNode<TYPE>* pop(Stack<TYPE>* stack)
     {
-        QueueNode<TYPE>* tmp;
+        StackNode<TYPE>* tmp;
 
-        if (!queue->head)
+        if (!stack->head)
             return NULL;
-        tmp = queue->head;
-        queue->head = queue->head->next;
+
+        tmp = stack->head;
+
+        stack->head = stack->head->next;
 
         return tmp;
     }
 
     template<typename TYPE>
-    void deleteQueue(Queue<TYPE>* queue)
+    void deleteStack(Stack<TYPE>* stack)
     {
-        if (!queue)
+        StackNode<TYPE>* tmp;
+
+        if (!stack->head)
             return;
 
-        if (queue->head)
-            do
-            {
-                queue->tail = queue->head->next;
-                delete queue->head;
-                queue->head = queue->tail;
-            } while (queue->head);
-            delete queue;
+        do
+        {
+            tmp = stack->head->next;
+            delete stack->head;
+            stack->head = tmp;
+        } while (stack->head);
 
-            return;
+        delete stack;
+
+        return;
     }
 };
